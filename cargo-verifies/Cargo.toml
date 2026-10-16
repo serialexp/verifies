@@ -1,0 +1,30 @@
+[package]
+name = "cargo-verifies"
+version = "0.1.0"
+edition = "2024"
+# Edition 2024 let chains.
+rust-version = "1.88"
+description = "Copy #[verifies] requirement keys from Rust test binaries into nextest's JUnit report"
+license.workspace = true
+repository.workspace = true
+readme = "../README.md"
+keywords = ["requirements", "traceability", "testing", "junit", "nextest"]
+categories = ["development-tools::testing", "development-tools::cargo-plugins"]
+
+[[bin]]
+name = "cargo-verifies"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+# Only the readers for the three formats test binaries come in. Binaries are
+# read through `ReadCache`, so only the headers and the record section are
+# loaded, not the whole (often very large) test binary.
+object = { version = "0.40", default-features = false, features = ["read_core", "elf", "macho", "pe", "std"] }
+quick-xml = "0.38"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# The rewritten report replaces the original only once fully written.
+tempfile = "3"
+thiserror = "2"

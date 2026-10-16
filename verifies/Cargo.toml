@@ -1,0 +1,21 @@
+[package]
+name = "verifies"
+version = "0.1.0"
+edition = "2024"
+# Edition 2024. Generated code needs `unsafe(link_section)` (1.82), so a
+# test crate on an older edition still needs this toolchain.
+rust-version = "1.85"
+description = "Mark a Rust test with the requirement keys it verifies, read back from the test binary by cargo-verifies"
+license.workspace = true
+repository.workspace = true
+readme = "../README.md"
+keywords = ["requirements", "traceability", "testing", "junit", "nextest"]
+categories = ["development-tools::testing"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full"] }

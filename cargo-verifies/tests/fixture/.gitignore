@@ -1,0 +1,2 @@
+# nextest's store (the JUnit report) is always under the workspace root.
+/target/

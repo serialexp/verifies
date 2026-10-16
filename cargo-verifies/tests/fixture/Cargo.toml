@@ -1,0 +1,18 @@
+# The project `tests/end_to_end.rs` builds, runs under nextest and annotates:
+# one of each way a test can carry #[verifies]. Its own workspace, so it
+# resolves and builds independently of the enclosing one.
+[workspace]
+
+[package]
+name = "verifies-fixture"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+verifies = { path = "../../../verifies" }
+
+[dev-dependencies]
+rstest = "0.26"
+test-case = "3"
+tokio = { version = "1", features = ["macros", "rt"] }

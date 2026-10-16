@@ -1,0 +1,9 @@
+[workspace]
+resolver = "3"
+members = ["verifies", "cargo-verifies"]
+# A standalone project `cargo-verifies`' end-to-end test builds and runs.
+exclude = ["cargo-verifies/tests/fixture"]
+
+[workspace.package]
+license = "MIT"
+repository = "https://github.com/serialexp/verifies"
