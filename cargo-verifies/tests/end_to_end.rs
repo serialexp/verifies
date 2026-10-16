@@ -16,13 +16,14 @@ fn fixture() -> PathBuf {
 }
 
 /// A command in the fixture, isolated from the nextest run executing this
-/// test: its own target directory, and none of the parent's `NEXTEST_*`
-/// settings.
+/// test: its own target directory, none of the parent's `NEXTEST_*`
+/// settings, and plain output whatever colour setting the caller forces.
 fn command(program: impl AsRef<std::ffi::OsStr>, target: &Path) -> Command {
     let mut command = Command::new(program);
     command
         .current_dir(fixture())
-        .env("CARGO_TARGET_DIR", target);
+        .env("CARGO_TARGET_DIR", target)
+        .env("CARGO_TERM_COLOR", "never");
     for (key, _) in std::env::vars_os() {
         if key.to_string_lossy().starts_with("NEXTEST") {
             command.env_remove(key);
